@@ -8,6 +8,7 @@ import org.junit.Test;
 public class GildedRoseTest {
 
 	
+	private static final int ZERO = 0;
 	private static final int STANDARD_DECAY = 1;
 	private static final int EXPIRED_DECAY = 2*STANDARD_DECAY;
 	
@@ -45,6 +46,19 @@ public class GildedRoseTest {
 		assertEquals("Quality should  decay faster",
 				ANY_QUALITY - EXPIRED_DECAY  , product.getQuality());
 
+	}
+	
+	@Test
+	public void qualityIsNeverNegative() {
+		product.setQuality(ZERO);
+		
+		GildedRose.updateQuality();
+		
+		assertFalse("Quality should not be negative", isQualityNegative());
+	}
+
+	private boolean isQualityNegative() {
+		return product.getQuality() < 0;
 	}
 
 }
