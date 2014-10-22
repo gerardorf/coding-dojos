@@ -60,5 +60,17 @@ public class GildedRoseTest {
 	private boolean isQualityNegative() {
 		return product.getQuality() < 0;
 	}
+	
+	@Test
+	public void agedBrieShouldIncreaseQuality() {
+		product.setName("Aged Brie");
+		
+		int initialQuality = product.getQuality();
+		GildedRose.updateQuality();
+		boolean qualityHasIncreased = product.getQuality() > initialQuality;
+		
+		assertTrue("Quality should increase", qualityHasIncreased);
+	}
+	
 
 }
